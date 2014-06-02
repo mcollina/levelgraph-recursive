@@ -1,12 +1,20 @@
 {
   "name": "levelgraph-recursive",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "breadth-first and deep-first recursive searches for LevelGraph",
   "main": "index.js",
   "scripts": {
     "test": "mocha test"
   },
-  "author": "",
+  "website": "https://github.com/mcollina/levelgraph-recursive",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcollina/levelgraph-recursive.git"
+  },
+  "bugs": {
+    "url": "http://github.com/mcollina/levelgraph-recursive/issues"
+  },
+  "author": "Matteo Collina <hello@matteocollina.com>",
   "license": "ISC",
   "devDependencies": {
     "levelgraph": "^0.8.2",
