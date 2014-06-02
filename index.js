@@ -13,7 +13,7 @@ function breadthFirst(graph, dest, queue, callback) {
     list.forEach(function(triple) {
       if (triple.object === dest) {
         found = true
-        callback(null)
+        callback(null, triple)
       } else {
         queue.push({
             subject: triple.object
