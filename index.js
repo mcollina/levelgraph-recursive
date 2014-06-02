@@ -1,7 +1,7 @@
 
 
-function breadthFirst(graph, dest, queue, callback) {
-  var pattern = queue.shift()
+function search(graph, dest, next, push, callback) {
+  var pattern = next()
 
   if (!pattern) {
     return callback(new Error("not found"))
@@ -15,7 +15,7 @@ function breadthFirst(graph, dest, queue, callback) {
         found = true
         callback(null, triple)
       } else {
-        queue.push({
+        push({
             subject: triple.object
           , predicate: triple.predicate
         })
@@ -23,7 +23,7 @@ function breadthFirst(graph, dest, queue, callback) {
     })
 
     if (!found) {
-      breadthFirst(graph, dest, queue, callback)
+      search(graph, dest, next, push, callback)
     }
   })
 }
@@ -31,8 +31,39 @@ function breadthFirst(graph, dest, queue, callback) {
 module.exports = function recursive(graph) {
   var ext = Object.create(graph)
 
-  ext.breadthFirst = function(subject, predicate, object, callback) {
-    breadthFirst(this, object, [{ subject: subject, predicate: predicate }], callback)
+  ext.breadthFirst = function breadthFirst(subject, predicate, object, callback) {
+    var queue = []
+
+    function enqueue(pattern) {
+      return queue.push(pattern)
+    }
+
+    function next() {
+      return queue.shift()
+    }
+
+    enqueue({ subject: subject, predicate: predicate })
+
+    search(this, object, next, enqueue, callback)
+
+    return this
+  }
+
+  ext.deepFirst = function deepFirst(subject, predicate, object, callback) {
+    var queue = []
+
+    function enqueue(pattern) {
+      return queue.push(pattern)
+    }
+
+    function next() {
+      return queue.pop()
+    }
+
+    enqueue({ subject: subject, predicate: predicate })
+
+    search(this, object, next, enqueue, callback)
+
     return this
   }
 

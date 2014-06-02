@@ -1,10 +1,10 @@
 
 var levelgraph = require("levelgraph")
   , memdown    = require("memdown")
-  , rec        = require("./")
+  , rec        = require("../")
   , expect     = require("must")
 
-describe("breadth-first searches", function() {
+describe("deep-first searches", function() {
   var graph
 
   beforeEach(function() {
@@ -17,7 +17,7 @@ describe("breadth-first searches", function() {
       , predicate: 'similar'
       , object: 'dest'
     }], function() {
-      graph.breadthFirst("origin", "similar", "dest", function(err) {
+      graph.deepFirst("origin", "similar", "dest", function(err) {
         expect(err).to.be.null();
         done()
       })
@@ -30,7 +30,7 @@ describe("breadth-first searches", function() {
       , predicate: 'similar'
       , object: 'dest'
     }], function() {
-      graph.breadthFirst("origin", "similar", "abcde", function(err) {
+      graph.deepFirst("origin", "similar", "abcde", function(err) {
         expect(err).not.to.be.null();
         done()
       })
@@ -47,7 +47,7 @@ describe("breadth-first searches", function() {
       , predicate: 'similar'
       , object: 'dest'
     }], function() {
-      graph.breadthFirst("origin", "similar", "dest", function(err) {
+      graph.deepFirst("origin", "similar", "dest", function(err) {
         expect(err).to.be.null();
         done()
       })
@@ -64,7 +64,7 @@ describe("breadth-first searches", function() {
       , predicate: 'similar'
       , object: 'dest'
     }], function() {
-      graph.breadthFirst("origin", "similar", "dest", function(err, triple) {
+      graph.deepFirst("origin", "similar", "dest", function(err, triple) {
         expect(triple).to.eql({
             subject: 'a'
           , predicate: 'similar'
@@ -88,14 +88,14 @@ describe("breadth-first searches", function() {
       , predicate: 'similar'
       , object: 'dest'
     }], function() {
-      graph.breadthFirst("origin", "similar", "dest", function(err) {
+      graph.deepFirst("origin", "similar", "dest", function(err) {
         expect(err).to.be.null();
         done()
       })
     })
   })
 
-  it("must be breadth first", function(done) {
+  it("must be deep first", function(done) {
     graph.put([{
         subject: 'origin'
       , predicate: 'similar'
@@ -107,15 +107,23 @@ describe("breadth-first searches", function() {
     }, {
         subject: 'a'
       , predicate: 'similar'
-      , object: 'dest'
+      , object: 'c'
+    }, {
+        subject: 'c'
+      , predicate: 'similar'
+      , object: 'd'
     }, {
         subject: 'b'
       , predicate: 'similar'
       , object: 'dest'
+    }, {
+        subject: 'd'
+      , predicate: 'similar'
+      , object: 'dest'
     }], function() {
-      graph.breadthFirst("origin", "similar", "dest", function(err, triple) {
+      graph.deepFirst("origin", "similar", "dest", function(err, triple) {
         expect(triple).to.eql({
-            subject: 'a'
+            subject: 'd'
           , predicate: 'similar'
           , object: 'dest' });
         done()

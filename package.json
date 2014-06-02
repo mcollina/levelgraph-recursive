@@ -4,7 +4,7 @@
   "description": "breadth-first and deep-first recursive searches for LevelGraph",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test.js"
+    "test": "mocha test"
   },
   "author": "",
   "license": "ISC",
