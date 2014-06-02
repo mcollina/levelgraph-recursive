@@ -1,15 +1,9 @@
-LevelGraph-Recursive
-====================
 
-Recursive searches for your LevelGraph
-
-
-```js
 var levelgraph = require('levelgraph')
   , graph      = levelgraph('mygraph')
   , expect     = require("must")
 
-graph = require('levelgraph-recursive')(graph)
+graph = require('./')(graph)
 
 graph.put([{
     subject: 'origin'
@@ -52,9 +46,3 @@ graph.put([{
     console.log('deep first ok!')
   })
 })
-```
-
-License
--------
-
-ISC
