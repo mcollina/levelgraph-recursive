@@ -1,0 +1,17 @@
+{
+  "name": "levelgraph-recursive",
+  "version": "0.0.0",
+  "description": "breadth-first and deep-first recursive searches for LevelGraph",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "levelgraph": "^0.8.2",
+    "memdown": "^0.10.1",
+    "mocha": "^1.20.0",
+    "must": "^0.12.0"
+  }
+}
